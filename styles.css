@@ -1,0 +1,15 @@
+ul.scheduled-notifications {
+  list-style: none;
+  margin: 0;
+}
+
+ul.scheduled-notifications li {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+ul.scheduled-notifications li.important-notification {
+  font-size: 1.15em;
+  color: red;
+}
