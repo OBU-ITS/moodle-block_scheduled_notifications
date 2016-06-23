@@ -1,5 +1,5 @@
 moodle-block_scheduled_notifications
-==================
+====================================
 
 A Moodle block that can display notifications between specified start and end dates.
 
