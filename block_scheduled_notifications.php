@@ -17,8 +17,8 @@
  * Scheduled notifications block
  *
  * @package    block_scheduled_notifications
- * @author     Peter Andrew
- * @copyright  2015, Oxford Brookes University
+ * @author     Peter Welham
+ * @copyright  2017, Oxford Brookes University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */
@@ -26,53 +26,31 @@
 class block_scheduled_notifications extends block_base {
 
     public function init() {
-            $this->title = get_string(
-                    'scheduled_notifications',
-                    'block_scheduled_notifications');
+		$this->title = get_string('notifications', 'block_scheduled_notifications');
     }
 
     public function get_content() {
-        if ($this->content !== null) {
+		global $DB; 
+
+       if ($this->content !== null) {
             return $this->content;
         }
 
-        /* Get notifications from global block config and split into individual 
-         * notification items on line breaks */
-        $notifications = get_config('scheduled_notifications', 'notifications_list');
-        $notificationsList = explode("\n", $notifications);
-
         $notificationsHTML = '';
+        $notifications = $DB->get_records('local_scheduled_notification');
+        foreach ($notifications as $notification) {
 
-        foreach ($notificationsList as $notification) {
-            $components = explode('|', $notification);
-            /* Notification items should have four components */
-            if (count($components) != 4) continue;
-
-            /* Check that notification item should be displayed */
-            $startTimestamp = strtotime($components[1]);
-            $endTimestamp = strtotime($components[2]);
-            if ($startTimestamp > time() || $endTimestamp < time()) continue;
-
-            $notificationsHTML .= '<li';
-            if ($components[3] == 'important') {
-                $notificationsHTML .= ' class="important-notification"';
-            }
-            $notificationsHTML  .=
-                    '>'
-                    . htmlspecialchars($components[0])
-                    . '</li>';
-        }
-
-        $html = '';
-        if (strlen($notificationsHTML) > 0) {
-                $html .= 
-                        '<ul class="scheduled-notifications">'
-                        . $notificationsHTML
-                        . '</ul>';
+            // Check that the notification item should be displayed
+            if (($notification->start_time <= time()) && ($notification->stop_time >= time())) {
+				if ($notificationsHTML == '') {
+					$notificationsHTML = '<hr class="divider">';
+				}
+				$notificationsHTML .= $notification->text . '<hr class="divider">';
+			}
         }
 
         $this->content = new stdClass;
-        $this->content->text = $html;
+		$this->content->text = $notificationsHTML;
         $this->content->footer = '';
 
         return $this->content;
@@ -81,6 +59,5 @@ class block_scheduled_notifications extends block_base {
     public function has_config() {
         return true;
     }
-
 }
 ?>

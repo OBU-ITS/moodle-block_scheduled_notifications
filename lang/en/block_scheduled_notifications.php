@@ -18,13 +18,10 @@
  *
  * @package    block_scheduled_notifications
  * @author     Peter Andrew
- * @copyright  2015, Oxford Brookes University
+ * @copyright  2017, Oxford Brookes University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */
 
 $string['pluginname'] = 'Scheduled notifications block';
-$string['scheduled_notifications'] = 'Notifications';
-
-$string['notifications_list'] = 'Notifications list';
-$string['notifications_list_desc'] = 'Each notification should be on a new line. The format of each notification should be: {notification text}|{start date/time}|{end date/time}|{type}. date/time should be YYYY-MM-DDThh:mm. date/times are UTC. type should be one of normal, important. Example: Test notification|2015-11-18T09:00|2015-11-18T17:00|normal';
+$string['notifications'] = 'Notifications';
