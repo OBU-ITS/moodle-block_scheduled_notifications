@@ -14,14 +14,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Scheduled notifications block
+ * Scheduled notifications block - language strings
  *
  * @package    block_scheduled_notifications
  * @author     Peter Andrew
- * @copyright  2017, Oxford Brookes University
+ * @copyright  2018, Oxford Brookes University
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  */
+
+$string['privacy:metadata'] = 'The Scheduled Notifications block does not store any personal data.';
 
 $string['pluginname'] = 'Scheduled notifications block';
 $string['notifications'] = 'Notifications';

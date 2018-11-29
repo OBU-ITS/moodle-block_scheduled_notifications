@@ -1,5 +1,7 @@
 <?php
 
+// This file is part of Moodle - http://moodle.org/
+//
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
@@ -14,7 +16,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Scheduled notifications block
+ * Scheduled notifications block - Privacy Subsystem implementation
  *
  * @package    block_scheduled_notifications
  * @author     Peter Andrew
@@ -23,9 +25,20 @@
  *
  */
 
-$plugin->component = 'block_scheduled_notifications'; // Full name of the plugin (used for diagnostics): plugintype_pluginname
-$plugin->version  = 2018111800;   // The (date) version of this module + 2 extra digital for daily versions
-$plugin->requires = 2014111003;   // Requires this Moodle version - at least 2.0
-$plugin->cron = 0;
-$plugin->release = 'v2.0.2';
-$plugin->maturity = MATURITY_STABLE;
+namespace block_scheduled_notifications\privacy;
+
+defined('MOODLE_INTERNAL') || die();
+
+// Privacy Subsystem implementing null_provider
+class provider implements \core_privacy\local\metadata\null_provider {
+
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return  string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}
